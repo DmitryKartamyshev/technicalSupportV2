@@ -6,11 +6,11 @@
   "license": "MIT",
   "private": true,
   "homepage": "https://github.com/DmitryKartamyshev/technicalSupportV2",
-  "deploy": "node ./node_modules/vue-gh-pages/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "nuxt"
+    "start": "nuxt",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
     "js-cookie": "^2.2.0",
