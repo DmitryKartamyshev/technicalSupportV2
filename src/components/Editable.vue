@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div id="div" class="alert alert-info" ref="somediv" contenteditable="true" @input="update"></div>
+		<div id="clear" class="alert alert-info" ref="somediv" contenteditable="true" @input="update"></div>
 		<button class="btn btn-success" @click="showSmile">Смайлы</button>
 		<span class="smiles" v-if="activeSmile" v-for="(smile, index) in smilesGif">
 			<img :src="smile" @click="addSmile(index)">
@@ -76,7 +76,15 @@
 			},
 		}
 	}
+
+	$(function(){
+		$('.btn-warning').click(function(){
+			$('#clear').empty();
+		})
+	});
 </script>
 <style scoped>
-	
+	.alert-info {
+		min-height: 50px;
+	}
 </style>
