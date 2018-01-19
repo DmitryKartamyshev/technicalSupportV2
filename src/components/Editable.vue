@@ -83,5 +83,7 @@
 	});
 </script>
 <style scoped>
-	
+	.alert-info {
+		min-height: 50px;
+	}
 </style>
