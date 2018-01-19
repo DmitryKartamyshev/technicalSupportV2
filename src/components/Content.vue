@@ -5,9 +5,6 @@
       v-for="(item, index) in messages">
       <div v-html="item"></div>
     </div>
-    <div class="alert alert-secondary">
-      <div v-html="msg"></div>
-    </div>
   </div>
   <div class="form-group">
    <label>Введите сообщение</label>
