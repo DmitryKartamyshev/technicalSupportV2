@@ -77,11 +77,12 @@
 		}
 	}
 
-	$(function(){
+  $(function(){
 		$('.btn-warning').click(function(){
 			$('#clear').empty();
 		})
 	});
+
 </script>
 <style scoped>
 	.alert-info {
