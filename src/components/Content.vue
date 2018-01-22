@@ -26,7 +26,7 @@
 				request: [
 				{
 					input: ['привет', 'здравствуйте', 'добр'],
-					output: ['Привет!', 'Здравствуйте!', getTimesOfDay()]
+					output: ['Привет!', 'Здравствуйте!', ' ']
 				},
 				{
 					input: ['не приходят данные', 'не приходят таблицы'],
@@ -41,6 +41,20 @@
 				},
 				]
 			} 
+		},
+		//хук для расчёта текущего времени суток
+		created() {
+			let date = new Date();
+			let hours = date.getHours();
+
+			if (hours >= 5 && hours < 12)
+				this.request[0].output[2] = 'Доброе утро!';
+			else if (hours >= 12 && hours < 16)
+				this.request[0].output[2] = 'Добрый день!';
+			else if (hours >= 16 && hours < 22)
+				this.request[0].output[2] = 'Добрый вечер!';
+			else if ((hours >= 22 && hours < 24) || (hours >= 0 && hours < 5))
+				this.request[0].output[2] = 'Доброй ночи!';
 		},
 		computed: {
 			...mapGetters([
@@ -87,20 +101,6 @@
 	}
 }
 	
-	//расчёт текущего времени суток
-	function getTimesOfDay() {
-		var date = new Date();
-		var hours = date.getHours();
-		if (hours >= 5 && hours < 12)
-			return 'Доброе утро!';
-		else if (hours >= 12 && hours < 16)
-			return 'Добрый день!';
-		else if (hours >= 16 && hours < 22)
-			return 'Добрый вечер!';
-		else if ((hours >= 22 && hours < 24) || (hours >= 0 && hours < 5))
-			return 'Доброй ночи!'
-	}
-
 </script>
 
 <style scoped>
