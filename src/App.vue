@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-6 col-lg-4">
 				<div class="alert alert-success" role="alert">
-					<h4 class="alert-heading">Techical Support</h4>
+					<h4 class="alert-heading">Техническая поддержка</h4>
 					<button class="btn btn-primary" @click="showChat">{{btnText }}</button>
 					<app-content v-show="chatActive"></app-content>
 				</div>
