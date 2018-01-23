@@ -105,4 +105,12 @@
 
 <style scoped>
 
+.btn-warning {
+	margin-top: 8px;
+}
+.content {
+	overflow: auto;
+	height: 300px;
+	background-color: #fff;
+}
 </style>
