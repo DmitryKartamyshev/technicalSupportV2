@@ -1,10 +1,12 @@
 <template>
-	<div>
-		<div id="clear" class="alert alert-info" ref="somediv" contenteditable="true" @input="update"></div>
-		<button class="btn btn-success" @click="showSmile">Смайлы</button>
-		<span class="smiles" v-if="activeSmile" v-for="(smile, index) in smilesGif">
-			<img :src="smile" @click="addSmile(index)">
-		</span>
+	<div class="input__block">
+		<div id="clear" class="input__field" ref="somediv" contenteditable="true" @input="update"></div>
+		<button class="btn btn-success btn-smile" @click="showSmile"></button>
+		<div class="smile__block" v-if="activeSmile">
+			<span class="smiles" v-for="(smile, index) in smilesGif">
+				<img :src="smile" @click="addSmile(index)">
+			</span>
+		</div>
 	</div>
 </template>
 
@@ -52,9 +54,9 @@
 						range = sel.getRangeAt(0);
 						range.deleteContents();
 
-						var el = document.createElement("div");
+						let el = document.createElement("div");
 						el.innerHTML = html;
-						var frag = document.createDocumentFragment(), node, lastNode;
+						let frag = document.createDocumentFragment(), node, lastNode;
 						while ( (node = el.firstChild) ) {
 							lastNode = frag.appendChild(node);
 						}
@@ -77,7 +79,7 @@
 		}
 	}
 
-  $(function(){
+	$(function(){
 		$('.btn-warning').click(function(){
 			$('#clear').empty();
 		})
@@ -85,7 +87,5 @@
 
 </script>
 <style scoped>
-	.alert-info {
-		min-height: 50px;
-	}
+
 </style>

@@ -65,7 +65,7 @@
 			receiveMsg(e) {
 				this.msg = e;
 			},
-			//Отправка сообщение пользователем
+			//Отправка сообщения пользователем
 			sendMsg() {     
 				let pattern = /^[\s]+$/;
 				if (!pattern.test(this.msg)) {
@@ -104,14 +104,5 @@
 </script>
 
 <style scoped>
-
-	.btn-warning {
-		margin-top: 8px;
-	}
-	.content {
-		overflow: auto;
-		height: 300px;
-		background-color: #fff;
-	}
 
 </style>

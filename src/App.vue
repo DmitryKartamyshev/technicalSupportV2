@@ -24,7 +24,7 @@
 		data() {
 			return {
 				chatActive: false,
-				btnText: 'Show chat'
+				btnText: 'Показать'
 			}
 		},
 		computed: {
