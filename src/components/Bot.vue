@@ -48,7 +48,6 @@
 			...mapGetters([
 				'messages'
 				]),
-
 			createMessage() {
 			//Генерация ответа бота
 			if (this.botState) {
@@ -63,21 +62,21 @@
 							botMsg = this.request[0].output[j] + ' ' + this.request[1].output[j];
 						  this.$store.dispatch('addBotMsg', botMsg);
 						  this.$emit('stopbot', false);
-						  return botMsg;
+						  return;
 
 					  } else if(~userMsg.indexOf(this.request[i].input[j])) {
 
 						  botMsg = this.request[i].output[j];
 						  this.$store.dispatch('addBotMsg', botMsg);
 						  this.$emit('stopbot', false);
-						  return botMsg;
+						  return;
 					  }
 				  }
 			  }
 			
 			    this.$store.dispatch('addBotMsg', botMsg);
 			    this.$emit('stopbot', false);
-			    return botMsg;
+			    return;
 			  }					
 		  },
 	  }

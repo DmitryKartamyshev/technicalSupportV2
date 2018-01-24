@@ -12,9 +12,6 @@
 					</div>
 					<app-bot :msg="msg" :botState="botState" @stopbot="stopBot"></app-bot>
 				</div>
-				<div class="form-group">
-					<label>Введите сообщение</label>
-				</div>
 				<app-input @update="receiveMsg"></app-input>
 				<app-button :msg="msg" @callbot="launchBot"></app-button>
 			</div>
@@ -73,7 +70,9 @@
 
 <style scoped>
 	.container {
-		margin: 30px auto;
+		margin: 25px auto;
+		min-width: 380px;
+		width: 33%;
 	}
 	.content {
 		overflow: auto;

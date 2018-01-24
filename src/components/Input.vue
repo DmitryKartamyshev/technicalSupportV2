@@ -11,7 +11,6 @@
 </template>
 
 <script>
-	import {mapGetters} from 'vuex';
 
 	export default {
 		data(){
@@ -25,11 +24,6 @@
 				"http://i.smiles2k.net/jumping_smiles/boldred.gif"
 				]
 			}			
-		},
-		computed: {
-			...mapGetters([
-				'messages'
-				]),
 		},
 		methods:{
 			showSmile() {

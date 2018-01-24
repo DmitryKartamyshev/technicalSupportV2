@@ -8,11 +8,11 @@
 
 	import {mapGetters} from 'vuex';
 	
-
 	export default {
+		props: ['msg'],
 		data(){
 			return {
-				msg: '',
+
 			} 
 		},
 		computed: {
@@ -25,7 +25,7 @@
 			sendMsg() {     
 				let pattern = /^[\s]+$/;
 				if (!pattern.test(this.msg)) {
-					this.messages.push(this.msg);
+					this.$store.commit('addMsgToChat', this.msg);
 					this.$emit('callbot', true); 
 				} 
 			}
