@@ -35,7 +35,6 @@
 			showSmile() {
 				this.activeSmile = !this.activeSmile;
 			},
-
 			update(event){
 				this.activated ? this.$emit('update', event.innerHTML) :
 				this.$emit('update', event.target.innerHTML);
@@ -103,7 +102,7 @@
 	display: inline-block;
 	right: -130px;
 	min-height: 50px;
-	width: 84%;
+	width: 81%;
 	padding: 10px;
 	border-radius: 5px;
 	background-color: #fff;
