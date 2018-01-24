@@ -1,6 +1,6 @@
 <template>
 	<div class="input__block">
-		<div id="clear" class="input__field" ref="somediv" contenteditable="true" @input="update"></div>
+		<div id="field" class="input__field" ref="inputfield" contenteditable="true" @input="update"></div>
 		<button class="btn btn-success btn-smile" @click="showSmile"></button>
 		<div class="smile__block" v-if="activeSmile">
 			<span class="smiles" v-for="(smile, index) in smilesGif">
@@ -41,7 +41,7 @@
 			},
 			addSmile(index) {
 
-				this.$refs.somediv.focus();
+				this.$refs.inputfield.focus();
 
 				let html = '<img src="' + this.smilesGif[index] + '" >';
 				let sel, range;
@@ -80,7 +80,7 @@
 
 	$(function(){
 		$('.btn-warning').click(function(){
-			$('#clear').empty();
+			$('#field').empty();
 		})
 	});
 
@@ -100,7 +100,6 @@
 }
 .input__field {
 	display: inline-block;
-	right: -130px;
 	min-height: 50px;
 	width: 81%;
 	padding: 10px;

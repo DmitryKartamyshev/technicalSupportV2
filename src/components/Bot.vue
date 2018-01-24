@@ -1,15 +1,13 @@
 <template>
-	<div>
-		<button class="btn btn-warning" @click="sendMsg">Отправить</button>
-	</div>  
+	<div>	{{ createMessage }}	</div>
 </template>
 
 <script>
-
-	import {mapGetters} from 'vuex';
-	
+  import {mapGetters} from 'vuex';
+	import {mapMutations} from 'vuex';
 
 	export default {
+		props: ['msg', 'botState'],
 		data(){
 			return {
 				msg: '',
@@ -49,20 +47,12 @@
 		computed: {
 			...mapGetters([
 				'messages'
-				])
-		},
-		methods: {
-			//Отправка сообщения пользователем
-			sendMsg() {     
-				let pattern = /^[\s]+$/;
-				if (!pattern.test(this.msg)) {
-					this.messages.push(this.msg);
-					this.createBotMsg(this.msg);  
-				} 
-			},
+				]),
+
+			createMessage() {
 			//Генерация ответа бота
-			createBotMsg(msg) {  
-				let userMsg = msg.toLowerCase();
+			if (this.botState) {
+				let userMsg = this.msg.toLowerCase();
 				let botMsg = "Я вас не понимаю";
 				for (let i = 0; i < this.request.length; i++) {
 					for (let j = 0; j < this.request[i].input.length; j++) {
@@ -71,33 +61,26 @@
 							&& ~userMsg.indexOf(this.request[1].input[j])) {
 
 							botMsg = this.request[0].output[j] + ' ' + this.request[1].output[j];
-						this.$store.dispatch('addBotMsg', botMsg);
-						return;
-					} else if(~userMsg.indexOf(this.request[i].input[j])) {
-						botMsg = this.request[i].output[j];
-						this.$store.dispatch('addBotMsg', botMsg);
-						return;
-					}
-				}
-			}
-			this.$store.dispatch('addBotMsg', botMsg);
-		},
-	},
-	components: {
-		
-	}
-}
-	
+						  this.$store.dispatch('addBotMsg', botMsg);
+						  this.$emit('stopbot', false);
+						  return botMsg;
+
+					  } else if(~userMsg.indexOf(this.request[i].input[j])) {
+
+						  botMsg = this.request[i].output[j];
+						  this.$store.dispatch('addBotMsg', botMsg);
+						  this.$emit('stopbot', false);
+						  return botMsg;
+					  }
+				  }
+			  }
+			
+			    this.$store.dispatch('addBotMsg', botMsg);
+			    this.$emit('stopbot', false);
+			    return botMsg;
+			  }					
+		  },
+	  }
+  }
+
 </script>
-
-<style scoped>
-
-.btn-warning {
-	margin-top: 8px;
-}
-.content {
-	overflow: auto;
-	height: 300px;
-	background-color: #fff;
-}
-</style>

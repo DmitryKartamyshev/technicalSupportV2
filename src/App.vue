@@ -10,11 +10,13 @@
 						v-for="(item, index) in messages">
 						<div v-html="item"></div>
 					</div>
+					<app-bot :msg="msg" :botState="botState" @stopbot="stopBot"></app-bot>
 				</div>
 				<div class="form-group">
 					<label>Введите сообщение</label>
 				</div>
-				<app-editable @update="receiveMsg"></app-editable>
+				<app-input @update="receiveMsg"></app-input>
+				<app-button :msg="msg" @callbot="launchBot"></app-button>
 			</div>
 		</div>
 	</div>
@@ -22,8 +24,9 @@
 </template>
 
 <script>
-	import AppContent from './components/Content';
-	import AppEditable from './components/Editable';
+	import AppBot from './components/Bot';
+	import AppButton from './components/Button';
+	import AppInput from './components/Input';
 
 	import {mapGetters} from 'vuex';
 	import {mapMutations} from 'vuex';
@@ -61,8 +64,9 @@
 			}
 		},
 		components: {
-			AppContent,
-			AppEditable
+			AppButton,
+			AppInput,
+			AppBot
 		}
 	}
 </script>
@@ -70,6 +74,10 @@
 <style scoped>
 	.container {
 		margin: 30px auto;
-		width: 33%;
+	}
+	.content {
+		overflow: auto;
+		height: 300px;
+		background-color: #fff;
 	}
 </style>
