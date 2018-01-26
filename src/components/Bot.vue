@@ -11,23 +11,13 @@
 		data(){
 			return {
 				msg: '',
-				request: [
+				request: 
 				{
-					input: ['привет', 'здравствуйте', 'добр'],
-					output: ['Привет!', 'Здравствуйте!', ' ']
-				},
-				{
-					input: ['не приходят данные', 'не приходят таблицы'],
-					output: [
+					input: ['привет', 'здравствуйте', 'добр', 'не приходят данные', 'не приходят таблицы', 'пока', 'до свидания'],
+					output: ['Привет!', 'Здравствуйте!', ' ',
 					"Убедитесь в правильности введённых данных",
-					"На сервере ведутся работы, подождите некоторое время"
-					]
-				},
-				{
-					input: ['пока', 'до свидания'],
-					output: ['Пока!', 'До свидания!']
-				},
-				]
+					"На сервере ведутся работы, подождите некоторое время", 'Пока!', 'До свидания!' ]
+				}
 			} 
 		},
 		//хук для расчёта текущего времени суток
@@ -50,34 +40,22 @@
 				]),
 			createMessage() {
 			//Генерация ответа бота
-			if (this.botState) {
-				let userMsg = this.msg.toLowerCase();
-				let botMsg = "Я вас не понимаю";
-				for (let i = 0; i < this.request.length; i++) {
-					for (let j = 0; j < this.request[i].input.length; j++) {
-
-						if (~userMsg.indexOf(this.request[0].input[j]) 
-							&& ~userMsg.indexOf(this.request[1].input[j])) {
-
-							botMsg = this.request[0].output[j] + ' ' + this.request[1].output[j];
-						  this.$store.dispatch('addBotMsg', botMsg);
-						  this.$emit('stopbot', false);
-						  return;
-
-					  } else if(~userMsg.indexOf(this.request[i].input[j])) {
-
-						  botMsg = this.request[i].output[j];
-						  this.$store.dispatch('addBotMsg', botMsg);
-						  this.$emit('stopbot', false);
-						  return;
-					  }
+			  if (this.botState) {
+				  let userMsg = this.msg.toLowerCase();
+				  let count = 0;
+				  for(let i = 0; i < this.request.input.length; i++) {
+					  let idx = userMsg.indexOf(this.request.input[i]);
+					  
+						while (idx != -1) {
+							this.$store.dispatch('addBotMsg', this.request.output[i]);
+							idx = userMsg.indexOf(this.request.input[i], idx + 1);
+							count++
+						}
 				  }
+
+				  if (count == 0) this.$store.dispatch('addBotMsg', 'Я вас не понимаю');
+				  this.$emit('stopbot', false);
 			  }
-			
-			    this.$store.dispatch('addBotMsg', botMsg);
-			    this.$emit('stopbot', false);
-			    return;
-			  }					
 		  },
 	  }
   }
