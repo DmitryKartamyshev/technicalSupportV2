@@ -7,7 +7,13 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
-		messages: []
+		messages: [
+		  {
+				title: '',
+				message: '',
+				style: {}
+		  }
+		]
 	},
 	getters: {
 		messages(state) {
@@ -16,13 +22,24 @@ export const store = new Vuex.Store({
 	},
 	mutations: {
     addMsgToChat(state, payLoad) {
-			state.messages.push(payLoad);
+			state.messages.push({
+				style: {'alert aler-info': true},
+				title: 'User',
+				message: payLoad
+			});
+		},
+		addBotMsgToChat(state, payLoad) {
+			state.messages.push({
+				style: {'alert aler-warning': true},
+				title: 'Bot',
+				message: payLoad
+			});
 		}
 	},
 	actions: {
 		addBotMsg(store, payLoad) {
 			setTimeout(() => {
-				store.commit('addMsgToChat', payLoad);
+				store.commit('addBotMsgToChat', payLoad);
 			}, 1000);     
 		},
 	},
