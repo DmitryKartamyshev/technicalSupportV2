@@ -6,10 +6,12 @@
 				<button class="btn btn-primary" @click="switchChatState">{{ btnText }}</button>
 				<div v-show="chatActive">
 					<div class="content alert alert-primary">
-						<div :class="(index%2 == 0) ? 'alert alert-info' : 'alert alert-warning'" 
-						v-for="(item, index) in messages">
-						<div v-html="item"></div>
-					</div>
+						<div class="message-box" v-for="message in messages">
+							<div :class="[message.style]">
+								<div class="title">{{ message.title }}</div>
+								<div class="description" v-html="message.message"></div>
+							</div>
+						</div>	
 					<app-bot :msg="msg" :botState="botState" @stopbot="stopBot"></app-bot>
 				</div>
 				<app-input @update="receiveMsg"></app-input>
