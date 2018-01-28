@@ -1,17 +1,17 @@
 <template>
 	<section>
 		<div class="container">
-			<div class="alert alert-success">
+			<div class="bot-header">
 				<h4 class="alert-heading">Техническая поддержка</h4>
-				<button class="btn btn-primary" @click="switchChatState">{{ btnText }}</button>
-				<div v-show="chatActive">
-					<div class="content alert alert-primary">
+				<button class="btn btn-state" @click="switchChatState">{{ btnText }}</button>
+				<div class="chat-window" v-show="chatActive">
+					<div class="content">
 						<div class="message-box" v-for="message in messages">
 							<div :class="[message.style]">
-								<div class="title">{{ message.title }}</div>
-								<div class="description" v-html="message.message"></div>
+								<div class="msg-title">{{ message.title }}</div>
+								<div class="msg-description" v-html="message.message"></div>
 							</div>
-						</div>	
+						</div>
 					<app-bot :msg="msg" :botState="botState" @stopbot="stopBot"></app-bot>
 				</div>
 				<app-input @update="receiveMsg"></app-input>
@@ -72,13 +72,69 @@
 
 <style scoped>
 	.container {
-		margin: 25px auto;
-		min-width: 380px;
-		width: 33%;
+		padding: 0;
+		margin: 30px auto;
+		min-width: 320px;
+		width: 30%;
+	}
+	.bot-header {
+		position: relative;
+		padding: .75rem 1.25rem;
+		margin-bottom: 1rem;
+		box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.1);
+		border: 1px solid transparent;
+		border-radius: .25rem;
 	}
 	.content {
 		overflow: auto;
 		height: 300px;
+		padding: 20px;
+		background-color: #ebeafd;
+	}
+	.chat-window {
+		position: absolute;
+		width: 100%;
+		padding: 20px;
+		left: 0;
+		top: 120px;
+		background-color: #22193f;
+		border-radius: 3px;
+		box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.1);
+	}
+	.message-user {
+		float: left;
+		width: 190px;
+		margin: 10px;
+	}
+	.message-box {
+		overflow: hidden;
+		color: #fff;
+	}
+	.message-bot {
+		width: 190px;
+		padding: 10px;
+		margin: 10px; 
+		float: right;
+	}
+	.msg-title {
+		font-size: 14px;
+		font-family: "Myriad Pro";
+		color: #1d1e2c;
+		font-weight: bold;
+		line-height: 1.2;
+	}
+	.message-user .msg-description {
+		background-color: #44337b;
+		border-radius: 0px 10px 10px 10px;
+		padding: 10px;
+	}
+	.message-bot .msg-description {
+		padding: 10px;
 		background-color: #fff;
+		color: #000;
+		border-radius: 10px 0 10px 10px;
+	}
+	.message-bot .msg-title	{
+		text-align: right;
 	}
 </style>

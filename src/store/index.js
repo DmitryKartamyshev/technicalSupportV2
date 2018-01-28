@@ -23,14 +23,14 @@ export const store = new Vuex.Store({
 	mutations: {
     addMsgToChat(state, payLoad) {
 			state.messages.push({
-				style: {'alert aler-info': true},
+				style: {'message-user': true},
 				title: 'User',
 				message: payLoad
 			});
 		},
 		addBotMsgToChat(state, payLoad) {
 			state.messages.push({
-				style: {'alert aler-warning': true},
+				style: {'message-bot': true},
 				title: 'Bot',
 				message: payLoad
 			});
