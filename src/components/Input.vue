@@ -30,23 +30,25 @@
 				this.activeSmile = !this.activeSmile;
 			},
 			update(event){
+        //Генерация события для родителя в зависимости от наличия в поле ввода смайлов
 				this.activated ? this.$emit('update', event.innerHTML) :
 				this.$emit('update', event.target.innerHTML);
 			},
-			addSmile(index) {
-
+      //Добавление смайла в поле ввода
+			addSmile(index) {       
 				this.$refs.inputfield.focus();
 
 				let html = '<img src="' + this.smilesGif[index] + '" >';
 				let sel, range;
 
 				if (window.getSelection) {
-
+          //Получение объекта соответствующего текущему выделению
 					sel = window.getSelection();
 					if (sel.getRangeAt && sel.rangeCount) {
 						range = sel.getRangeAt(0);
 						range.deleteContents();
-
+            
+            //Создание узла, содержащего смайл и его вставка в поле ввода
 						let el = document.createElement("div");
 						el.innerHTML = html;
 						let frag = document.createDocumentFragment(), node, lastNode;
@@ -71,7 +73,7 @@
 			},
 		}
 	}
-
+  //Очистка поля ввода после отправки сообщения
 	$(function(){
 		$('.btn-warning').click(function(){
 			$('#field').empty();
@@ -119,6 +121,7 @@
 .btn-smile {
 	position: relative;
 	margin-left: 5px;
+  vertical-align: top;
 }
 
 </style>
