@@ -91,6 +91,7 @@
 }
 .input__block {
 	position: relative;
+	margin-top: 20px;
 }
 .input__field {
 	display: inline-block;

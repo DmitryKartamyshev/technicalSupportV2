@@ -24,7 +24,7 @@
 			//Отправка сообщения пользователем
 			sendMsg() {     
 				let pattern = /^[\s]+$/;
-				if (!pattern.test(this.msg)) {
+				if (this.msg.replace(/&nbsp;/gi,'f') != "") {
 					this.$store.commit('addMsgToChat', this.msg);
 					this.$emit('callbot', true); 
 				} 

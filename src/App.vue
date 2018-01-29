@@ -1,9 +1,11 @@
 <template>
-	<section>
-		<div class="container">
-			<div class="bot-header">
-				<h4 class="alert-heading">Техническая поддержка</h4>
-				<button class="btn btn-state" @click="switchChatState">{{ btnText }}</button>
+	<div class="container">
+		<div class="bot-header">
+			<h4 class="alert-heading">Техническая поддержка</h4>
+			<button class="btn btn-state" @click="switchChatState">{{ btnText }}</button>
+			<transition enter-active-class="animated fadeInDown"
+				leave-active-class="animated fadeOut"
+				mode="in-out">
 				<div class="chat-window" v-show="chatActive">
 					<div class="content">
 						<div class="message-box" v-for="message in messages">
@@ -11,15 +13,15 @@
 								<div class="msg-title">{{ message.title }}</div>
 								<div class="msg-description" v-html="message.message"></div>
 							</div>
-						</div>
-					<app-bot :msg="msg" :botState="botState" @stopbot="stopBot"></app-bot>
+						</div>					
+						<app-bot :msg="msg" :botState="botState" @stopbot="stopBot"></app-bot>
+					</div>
+					<app-input @update="receiveMsg"></app-input>
+					<app-button :msg="msg" @callbot="launchBot"></app-button>
 				</div>
-				<app-input @update="receiveMsg"></app-input>
-				<app-button :msg="msg" @callbot="launchBot"></app-button>
-			</div>
+			</transition>
 		</div>
 	</div>
-</section>
 </template>
 
 <script>
@@ -136,5 +138,9 @@
 	}
 	.message-bot .msg-title	{
 		text-align: right;
+	}
+	.btn:focus {
+		outline: 0;
+		box-shadow: initial;
 	}
 </style>
